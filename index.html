@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacking Simulation</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+    body {
+        background-color: rgba(5, 51, 5, 0.284);
+        color: rgb(0, 66, 0);
+        font-family: "Montserrat", sans-serif;
+        font-weight: 300;
+    }
+
+    .hack-message {
+        font-size: 20px;
+        margin: 5px;
+    }
+</style>
+<body>
+    <div class="hack-message">
+        Your Device is hacked ... <br />
+        wait a second
+    </div>
+
+    <script>
+        async function main() {
+            setInterval(() => {
+                let last = document.body.getElementsByTagName("div");
+                last = last[last.length - 1];
+                if (last.innerHTML.endsWith("...")) {
+                    last.innerHTML = last.innerHTML.slice(0, -3) + " ";
+                } else {
+                    last.innerHTML = last.innerHTML + ".";
+                }
+            }, 800);
+
+            let text = [
+                "Initialized Hacking... Now reading your data",
+                "Reading your files...",
+                "Password files detected...",
+                "Sending all passwords and personal files to the server...",
+                "Cleaning up...",
+                "Check your data... It's gone!"
+            ];
+
+            for (let item of text) {
+                await addItem(item);
+            }
+        }
+
+        async function addItem(item) {
+            await randomDelay();
+            let div = document.createElement("div");
+            div.className = "hack-message";
+            div.innerHTML = item;
+            document.body.appendChild(div);
+        }
+
+        function randomDelay() {
+            return new Promise((resolve) => {
+                let time = 1 + 6 * Math.random();
+                setTimeout(resolve, time * 1000);
+            });
+        }
+
+        main();
+    </script>
+</body>
+</html>
